@@ -1,0 +1,37 @@
+{
+    "name" : "grunt-gabarito",
+    "description" : "Gabarito plugin for grunt.",
+    "version" : "0.0.1",
+    "homepage" : "https://github.com/pablo/grunt-gabarito",
+
+    "author" : {
+        "name" : "Pablo Cabrera",
+        "email" : "pablo.cabrera.munoz@gmail.com"
+    },
+
+    "repository" : {
+        "type" : "git",
+        "url" : "git://github.com/pablo/grunt-gabarito.git"
+    },
+    "licenses" : "MIT",
+
+    "scripts" : {
+        "test" : "grunt test"
+    },
+
+    "dependencies" : {
+        "parts" : "git://github.com/pablo-cabrera/parts"
+    },
+
+    "devDependencies" : {
+        "grunt-contrib-jshint" : "^0.9.2",
+        "grunt" : "~0.4.5"
+    },
+
+    "peerDependencies" : {
+        "grunt" : "~0.4.5",
+        "gabarito" : "^0.0"
+    },
+
+    "keywords" : ["gruntplugin gabarito"]
+}
