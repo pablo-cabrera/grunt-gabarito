@@ -13,41 +13,65 @@ module.exports = function(grunt) {
     var path = require("path");
     var parts = require("parts");
 
+    var defaults = {
+        environments: ["node"],
+        reporters: ["console"]
+    };
+
+    var pkg = grunt.file.readJSON("package.json")
+
     grunt.registerMultiTask("test", "gabarito test runner", function() {
         var done = this.async();
-//        var runner = new gabarito.runner.Runner();
-//        var cwd = process.cwd();
-//
-//        this.files.forEach(function (f) {
-//            f.src.forEach(function (f) {
-//                if (f.indexOf("/") !== 0) {
-//                    f = path.join(cwd, f);
-//                }
-//                runner.addFile(f);
-//            });
-//        });
+        var runner = new gabarito.runner.Runner();
+        var cwd = process.cwd();
 
-        var options = this.options();
+        this.files.forEach(function (f) {
+            f.src.forEach(function (f) {
+                runner.addFile(f.indexOf("/") === 0? f: path.join(cwd, f));
+            });
+        });
 
-        console.log("yo", options);
+        var options = this.options(defaults);
+        options.environments.map(function (env) {
+            if (parts.isString(env)) {
+                env = { type: env };
+            }
 
-        done(true);
+            switch (env.type) {
+            case "node"     : return new gabarito.runner.NodeEnvironment(
+                    env.gabarito || gabarito);
 
-//
-//
-//        runner.addEnvironment(new gabarito.runner.NodeEnvironment());
-//        runner.addReporter(new gabarito.runner.ConsoleReporter());
-//        runner.run(function (results) {
-//            var hasErrors = results.some(function (r) {
-//                return r.results.some(function (r) {
-//                    return parts.some(r.results, function (r, i) {
-//                        return parts.hop(r, "error");
-//                    });
-//                });
-//            });
-//
-//            done(!hasErrors);
-//        });
+            case "selenium" : return new gabarito.runner.SeleniumEnvironment(
+                env.browser,
+                env.hub || "http://localhost:4444/wd/hub");
+            }
+        }).forEach(function (env) { runner.addEnvironment(env); });
+
+        options.reporters.map(function (r) {
+            if (parts.isString(r)) {
+                r = { type : r };
+            }
+
+            switch (r.type) {
+            case "console"  : return new gabarito.runner.ConsoleReporter();
+            case "junit"    : return new gabarito.runner.JUnitXmlReporter(
+                    r.file || "results.xml",
+                    r.name || pkg.name);
+            }
+        }).forEach(function (r) { runner.addReporter(r); });
+
+        runner.run(function (results) {
+            var hasErrors = results.some(function (r) {
+                return r.results.some(function (r) {
+                    return parts.some(r.results, function (r, i) {
+                        return parts.hop(r, "error");
+                    });
+                });
+            });
+
+            done(!hasErrors);
+        });
+
     });
 
 };
