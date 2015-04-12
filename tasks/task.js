@@ -31,6 +31,8 @@ module.exports = function(grunt) {
         if (env.version) {
             capabilities.version = env.version;
         }
+
+        return capabilities;
     };
 
     var getHostIpAddress = function () {
