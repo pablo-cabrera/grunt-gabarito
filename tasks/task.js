@@ -91,8 +91,8 @@ module.exports = function(grunt) {
             }
 
             switch (r.type) {
-            case "console"  : return new gabarito.runner.ConsoleReporter();
-            case "junit"    : return new gabarito.runner.JUnitXmlReporter(
+            case "console"  : return new plumbing.ConsoleReporter();
+            case "junit"    : return new plumbing.JUnitXmlReporter(
                     r.file || "results.xml",
                     r.name || pkg.name);
             }
