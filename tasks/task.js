@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
     var getCapabilities = function (env) {
         var capabilities = {
-            browser: env.browser
+            browserName: env.browserName
         };
 
         if (env.platform) {
