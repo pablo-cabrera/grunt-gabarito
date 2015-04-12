@@ -75,11 +75,11 @@ module.exports = function(grunt) {
 
             case "selenium"         : return new plumbing.SeleniumEnvironment(
                 getCapabilities(env),
-                env.hub || "http://localhost:4444/wd/hub");
+                env.hub || "localhost:4444");
 
             case "vbox-selenium"    : return new plumbing.VBoxSeleniumEnvironment(
                 getCapabilities(env),
-                env.hub || "http://localhost:4444/wd/hub",
+                env.hub || "localhost:4444",
                 env.host || getHostIpAddress(),
                 env.vm,
                 env.vmAddress);
