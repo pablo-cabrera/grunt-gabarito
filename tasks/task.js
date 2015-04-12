@@ -1,9 +1,7 @@
 /*
- * grunt-gabarito
- * https://github.com/pablo/grunt-gabarito
+ * grunt-gabarito https://github.com/pablo/grunt-gabarito
  *
- * Copyright (c) 2015 Pablo Cabrera
- * Licensed under the MIT license.
+ * Copyright (c) 2015 Pablo Cabrera Licensed under the MIT license.
  */
 
 module.exports = function(grunt) {
@@ -12,6 +10,7 @@ module.exports = function(grunt) {
     var gabarito = require("gabarito");
     var path = require("path");
     var parts = require("parts");
+    var plumbing = gabarito.plumbing;
 
     var defaults = {
         environments: ["node"],
@@ -20,9 +19,40 @@ module.exports = function(grunt) {
 
     var pkg = grunt.file.readJSON("package.json")
 
+    var getCapabilities = function (env) {
+        var capabilities = {
+            browser: env.browser
+        };
+
+        if (env.platform) {
+            capabilities.platform = env.platform
+        }
+
+        if (env.version) {
+            capabilities.version = env.version;
+        }
+    };
+
+    var getHostIpAddress = function () {
+        var os = require('os');
+        var ifaces = os.networkInterfaces();
+        var ips = [];
+
+        parts.forEach(ifaces, function (v) {
+            v.forEach(function (iface) {
+                if ('IPv4' !== iface.family || iface.internal) {
+                    return;
+                }
+                ips.push(iface.address);
+            });
+        });
+
+        return ips[0] || "localhost";
+    };
+
     grunt.registerMultiTask("test", "gabarito test runner", function() {
         var done = this.async();
-        var runner = new gabarito.runner.Runner();
+        var runner = new plumbing.Runner();
         var cwd = process.cwd();
 
         this.files.forEach(function (f) {
@@ -38,13 +68,21 @@ module.exports = function(grunt) {
             }
 
             switch (env.type) {
-            case "node"     : return new gabarito.runner.NodeEnvironment(
+            case "node"             : return new plumbing.NodeEnvironment(
                     env.gabarito || gabarito);
 
-            case "selenium" : return new gabarito.runner.SeleniumEnvironment(
-                env.browser,
+            case "selenium"         : return new plumbing.SeleniumEnvironment(
+                getCapabilities(env),
                 env.hub || "http://localhost:4444/wd/hub");
+
+            case "vbox-selenium"    : return new plumbing.VBoxSeleniumEnvironment(
+                getCapabilities(env),
+                env.hub || "http://localhost:4444/wd/hub",
+                env.host || getHostIpAddress(),
+                env.vm,
+                env.vmAddress);
             }
+
         }).forEach(function (env) { runner.addEnvironment(env); });
 
         options.reporters.map(function (r) {
