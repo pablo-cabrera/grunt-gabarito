@@ -62,8 +62,13 @@ module.exports = function(grunt) {
                 runner.addFile(f.indexOf("/") === 0? f: path.join(cwd, f));
             });
         });
+        var options = {};
+        parts.merge(options, this.options(defaults));
 
-        var options = this.options(defaults);
+        if (options.config) {
+            parts.merge(options, grunt.file.readJson(options.config));
+        }
+
         options.environments.map(function (env) {
             if (parts.isString(env)) {
                 env = { type: env };
