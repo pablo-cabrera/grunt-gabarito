@@ -66,7 +66,7 @@ module.exports = function(grunt) {
         parts.merge(options, this.options(defaults));
 
         if (options.config) {
-            parts.merge(options, grunt.file.readJson(options.config));
+            parts.merge(options, grunt.file.readJSON(options.config));
         }
 
         options.environments.map(function (env) {
