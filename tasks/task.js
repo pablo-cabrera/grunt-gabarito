@@ -17,7 +17,7 @@ module.exports = function(grunt) {
         reporters: ["console"]
     };
 
-    var pkg = grunt.file.readJSON("package.json")
+    var pkg = grunt.file.readJSON("package.json");
 
     var getCapabilities = function (env) {
         var capabilities = {
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
         };
 
         if (env.platform) {
-            capabilities.platform = env.platform
+            capabilities.platform = env.platform;
         }
 
         if (env.version) {
