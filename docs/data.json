@@ -1,0 +1,113 @@
+{
+    "project": {
+        "name": "grunt-gabarito",
+        "description": "Gabarito plugin for grunt.",
+        "version": "0.0.1",
+        "url": "https://github.com/pablo/grunt-gabarito"
+    },
+    "files": {
+        "lib/GabaritoTask.js": {
+            "name": "lib/GabaritoTask.js",
+            "modules": {},
+            "classes": {
+                "GabaritoTask": 1
+            },
+            "fors": {
+                "GabaritoTask": 1
+            },
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "GabaritoTask": {
+            "name": "GabaritoTask",
+            "shortname": "GabaritoTask",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "lib/GabaritoTask.js",
+            "line": 28,
+            "description": "The gabarito task responsible for reading grunt options and dispatching\nthe gabarito runner",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "runner",
+                    "description": "",
+                    "type": "gabarito::gabarito.plumbing.Runner"
+                }
+            ]
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "lib/GabaritoTask.js",
+            "line": 45,
+            "description": "The singleton method for the GabaritoTask, used to register the task\nitself and should be used to register environments and reporters.",
+            "itemtype": "method",
+            "name": "instance",
+            "static": 1,
+            "return": {
+                "description": "",
+                "type": "GabaritoTask"
+            },
+            "class": "GabaritoTask"
+        },
+        {
+            "file": "lib/GabaritoTask.js",
+            "line": 172,
+            "description": "Registers an environment factory within the GabaritoTask.\n\nThe factory method will receive the configuration object and the\ngrunt reference.",
+            "itemtype": "method",
+            "name": "registerEnvironment",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "factory",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "GabaritoTask"
+        },
+        {
+            "file": "lib/GabaritoTask.js",
+            "line": 188,
+            "description": "Registers a reporter factory within the GabaritoTask.\n\nThe factory method will receive the configuration object and the\ngrunt reference.",
+            "itemtype": "method",
+            "name": "registerReporter",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "factory",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "GabaritoTask"
+        },
+        {
+            "file": "lib/GabaritoTask.js",
+            "line": 204,
+            "description": "Returns the grunt task function to be register within the\nmodule.exports fashion",
+            "itemtype": "method",
+            "name": "task",
+            "return": {
+                "description": "",
+                "type": "Function"
+            },
+            "class": "GabaritoTask"
+        }
+    ],
+    "warnings": []
+}
