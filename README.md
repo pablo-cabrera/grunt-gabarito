@@ -13,7 +13,6 @@ Install dev dependencies.
 npm install gabarito --save-dev
 npm install grunt-gabarito --save-dev
 ```
-
 Configure within `Gruntfile.js`
 
 ```js
