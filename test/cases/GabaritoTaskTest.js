@@ -63,7 +63,7 @@ function () {
 
     grunt.registerMultiTask.
         verify().
-        args("test", "gabarito test runner", taskGrabber);
+        args("gabarito", "gabarito test runner", taskGrabber);
 
     taskGrabber.grab().call(gruntThis);
 

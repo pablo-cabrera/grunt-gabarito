@@ -53,7 +53,7 @@ module.exports = function (grunt) {
             files: lintFiles
         },
 
-        test: {
+        gabarito: {
             src: "test/cases/**/*.js"
         },
 
@@ -83,6 +83,6 @@ module.exports = function (grunt) {
     grunt.loadTasks("tasks");
 
     // By default, lint and run all tests.
-    grunt.registerTask("default", ["jscs", "jshint", "test"]);
+    grunt.registerTask("default", ["jscs", "jshint", "gabarito"]);
 
 };
