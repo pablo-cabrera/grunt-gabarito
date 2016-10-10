@@ -1,7 +1,7 @@
 {
   "name": "grunt-gabarito",
   "description": "Gabarito plugin for grunt.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/pablo/grunt-gabarito",
   "author": {
     "name": "Pablo Cabrera",
