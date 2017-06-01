@@ -1,7 +1,7 @@
 {
   "name": "grunt-gabarito",
   "description": "Gabarito plugin for grunt.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "https://github.com/pablo/grunt-gabarito",
   "author": {
     "name": "Pablo Cabrera",
@@ -16,8 +16,8 @@
     "test": "grunt"
   },
   "dependencies": {
-    "ilk": "0.0.1-alpha.1",
-    "parts": "0.0.1-alpha.002"
+    "ilk": "0.3.0",
+    "parts": "0.0.2"
   },
   "devDependencies": {
     "gabarito": "^0.0.1",
